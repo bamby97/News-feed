@@ -17,7 +17,7 @@ public class User {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "user")
-    private List<Post> posts;
+    private List<Post> posts=new ArrayList<>();
     @ManyToMany
     @JoinTable(name="follow",
             joinColumns=@JoinColumn(name="userID"),

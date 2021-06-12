@@ -46,6 +46,18 @@ public class UserRepositoryTest {
     }
 
     @Test
+    void createUser(){
+        User savedUser=new User(
+                "tom"
+        );
+
+
+        User user=userRepository.save(savedUser);
+
+        then(user).isEqualTo(savedUser);
+    }
+
+    @Test
     @Transactional
     void followUser_expectFollowUser(){
         User user1=entityManager.persistAndFlush(new User(
