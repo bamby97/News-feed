@@ -26,6 +26,9 @@ public class UserControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+    @Autowired
+    ObjectMapper objectMapper;
+
     @MockBean
     UserService userService;
 
@@ -35,18 +38,12 @@ public class UserControllerTest {
         given(userService.createUser(any(User.class))).willReturn(
                 new  User("josh")
         );
-        mockMvc.perform(post("/api/user").content(asJsonString(new User("josh"))).accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+        mockMvc.perform(post("/api/user").content(objectMapper.writeValueAsString(new User("josh"))).contentType("application/json")).andExpect(status().isCreated());
     }
     @Test
     public void followUserTest() throws Exception {
         mockMvc.perform(get("/api/user/follow?from=123&to=134")).andExpect(status().isAccepted());
     }
 
-    public static String asJsonString(final User obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 }

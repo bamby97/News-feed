@@ -19,8 +19,8 @@ public class UserService {
     @Transactional
     public boolean followUser(Long fromUid,Long toUid){
         User userFrom=userRepository.findById(fromUid).orElseThrow(()->new NoUserFoundException("User with id: "+fromUid+"does not exist"));
-        User userTo=userRepository.findById(fromUid).orElseThrow(()->new NoUserFoundException("User with id: "+toUid+"does not exist"));
-        userFrom.getFollowing().add(userTo);
+        User userTo=userRepository.findById(toUid).orElseThrow(()->new NoUserFoundException("User with id: "+toUid+"does not exist"));
+        userTo.getFollowers().add(userFrom);
         return true;
     }
 

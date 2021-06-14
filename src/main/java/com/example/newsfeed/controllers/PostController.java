@@ -30,7 +30,7 @@ public class PostController {
     }
 
     @GetMapping("/feed")
-    ResponseEntity<List<Post>> createPost(@RequestParam("id") Long uid){
+    ResponseEntity<List<Post>> GetNewsFeed(@RequestParam("id") Long uid){
         List<Post> feed=postService.getNewsFeedFromUser(uid);
         return new ResponseEntity<>(feed, HttpStatus.OK);
     }

@@ -21,11 +21,11 @@ public class UserController {
     @GetMapping("/user/follow")
     public ResponseEntity<String> followUser(@RequestParam("from")Long from,@RequestParam("to") Long to){
         userService.followUser(from,to);
-        return new ResponseEntity<>("User has been created", HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
     @PostMapping("/user")
-    public ResponseEntity<User> createUser(@RequestBody @Validated User user){
+    public ResponseEntity<User> createUser(@RequestBody User user){
         User savedUser=userService.createUser(user);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedUser,HttpStatus.CREATED);
     }
 }
